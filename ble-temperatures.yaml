@@ -1,0 +1,88 @@
+substitutions:
+  esphome_name: ble-temperatures
+
+esphome:
+  name: ${esphome_name}
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+wifi:
+  ssid: !secret esphome_wifi_ssid
+  password: !secret esphome_wifi_pass
+
+logger:
+  level: debug
+
+api:
+  reboot_timeout: 60min
+  password: !secret esphome_api_pass
+  encryption:
+    key: !secret esphome_encryption_key
+
+ota:
+  password: !secret esphome_ota_pass
+
+time:
+  - platform: homeassistant
+
+esp32_ble_tracker:
+
+switch:
+  - platform: gpio
+    name: "${esphome_name}-Onboard-LED"
+    pin: 2
+    inverted: True
+
+  - platform: restart
+    name: ${esphome_name}-restart
+    id: restart_switch
+
+sensor:
+  - platform: uptime
+    name: "${esphome_name}_Uptime Sensor"
+
+  - platform: wifi_signal
+    name: "${esphome_name} WiFi Signal"
+    update_interval: 60s
+
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:85:F5:6E"
+    temperature:
+      name: "Cocina Temperature"
+    humidity:
+      name: "Cocina Humidity"
+    battery_level:
+      name: "Cocina Battery-Level"
+    battery_voltage:
+      name: "Cocina Battery-Voltage"
+    signal_strength:
+      name: "Cocina Signal"
+
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:42:C5:9F"
+    temperature:
+      name: "Habitacion Christian Temperature"
+    humidity:
+      name: "Habitacion Christian Humidity"
+    battery_level:
+      name: "Habitacion Christian Battery-Level"
+    battery_voltage:
+      name: "Habitacion Christian Battery-Voltage"
+    signal_strength:
+      name: "Habitacion Christian Signal"
+
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:31:45:FA"
+    temperature:
+      name: "Habitacion Principal Temperature"
+    humidity:
+      name: "Habitacion Principal Humidity"
+    battery_level:
+      name: "Habitacion Principal Battery-Level"
+    battery_voltage:
+      name: "Habitacion Principal Battery-Voltage"
+    signal_strength:
+      name: "Habitacion Principal Signal"
