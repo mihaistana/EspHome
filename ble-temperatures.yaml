@@ -8,7 +8,7 @@ esp32:
   board: esp32dev
   framework:
     type: arduino
-
+    
 wifi:
   ssid: !secret esphome_wifi_ssid
   password: !secret esphome_wifi_pass
@@ -27,7 +27,7 @@ ota:
 
 time:
   - platform: homeassistant
-
+  
 esp32_ble_tracker:
 
 switch:
@@ -43,11 +43,11 @@ switch:
 sensor:
   - platform: uptime
     name: "${esphome_name}_Uptime Sensor"
-
+    
   - platform: wifi_signal
     name: "${esphome_name} WiFi Signal"
     update_interval: 60s
-
+    
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:85:F5:6E"
     temperature:
@@ -60,7 +60,7 @@ sensor:
       name: "Cocina Battery-Voltage"
     signal_strength:
       name: "Cocina Signal"
-
+  
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:42:C5:9F"
     temperature:
@@ -86,3 +86,16 @@ sensor:
       name: "Habitacion Principal Battery-Voltage"
     signal_strength:
       name: "Habitacion Principal Signal"
+      
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:BA:67:D9"
+    temperature:
+      name: "Buhardilla Temperature"
+    humidity:
+      name: "Buhardilla Humidity"
+    battery_level:
+      name: "Buhardilla Battery-Level"
+    battery_voltage:
+      name: "Buhardilla Battery-Voltage"
+    signal_strength:
+      name: "Buhardilla Signal" 
